@@ -1,5 +1,5 @@
 {
-    "name": "woda/wp-wp-rocket-config",
+    "name": "woda/wp-wp-rocket-settings",
     "type": "library",
     "description": "",
     "keywords": [
@@ -7,7 +7,7 @@
         "module"
     ],
     "license": "GPLv3",
-    "homepage": "https://github.com/wwwoda/wp-wp-rocket-config",
+    "homepage": "https://github.com/wwwoda/wp-wp-rocket-settings",
     "authors": [
         {
             "name": "Woda",
@@ -24,8 +24,8 @@
         }
     ],
     "support": {
-        "issues": "https://github.com/wwwoda/wp-wp-rocket-config/issues",
-        "source": "https://github.com/wwwoda/wp-wp-rocket-config"
+        "issues": "https://github.com/wwwoda/wp-wp-rocket-settings/issues",
+        "source": "https://github.com/wwwoda/wp-wp-rocket-settings"
     },
     "autoload": {
         "psr-4": {
