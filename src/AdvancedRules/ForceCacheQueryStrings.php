@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Woda\WordPress\WpRocket\AdvancedRules;
+namespace Woda\WordPress\WpRocket\Settings\AdvancedRules;
 
-use Woda\WordPress\WpRocket\AbstractArrayMerger;
+use Woda\WordPress\WpRocket\Settings\AbstractArrayMerger;
 
 class ForceCacheQueryStrings extends AbstractArrayMerger
 {

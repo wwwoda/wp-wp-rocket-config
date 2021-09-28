@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Woda\WordPress\WpRocket\Preload;
+namespace Woda\WordPress\WpRocket\Settings\Preload;
 
 use Psr\Container\ContainerInterface;
 use Woda\WordPress\Config\Config;

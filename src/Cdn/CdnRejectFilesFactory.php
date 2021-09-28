@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Woda\WordPress\WpRocket\Cdn;
+namespace Woda\WordPress\WpRocket\Settings\Cdn;
 
 use Psr\Container\ContainerInterface;
 use Woda\WordPress\Config\Config;

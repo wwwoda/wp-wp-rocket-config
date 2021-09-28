@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Woda\WordPress\WpRocket\Preload;
+namespace Woda\WordPress\WpRocket\Settings\Preload;
 
-use Woda\WordPress\WpRocket\AbstractArrayMerger;
+use Woda\WordPress\WpRocket\Settings\AbstractArrayMerger;
 
 class PreloadFonts extends AbstractArrayMerger
 {
