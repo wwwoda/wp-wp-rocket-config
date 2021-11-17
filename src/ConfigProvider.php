@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Woda\WordPress\WpRocket;
+namespace Woda\WordPress\WpRocket\Settings;
 
 final class ConfigProvider
 {
@@ -130,62 +130,62 @@ final class ConfigProvider
             ],
             'hook' => [
                 'provider' => [
-                    \Woda\WordPress\WpRocket\FileOptimization\Css\ExcludeCombineAndMinifyCss::class,
-                    \Woda\WordPress\WpRocket\FileOptimization\Css\CriticalCss::class,
-                    \Woda\WordPress\WpRocket\FileOptimization\Css\CssSafelist::class,
-                    \Woda\WordPress\WpRocket\FileOptimization\Css\ExcludeAsyncCss::class,
-                    \Woda\WordPress\WpRocket\FileOptimization\Js\ExcludeCombineAndMinifyInlineJs::class,
-                    \Woda\WordPress\WpRocket\FileOptimization\Js\ExcludeCombineAndMinifyFileJs::class,
-                    \Woda\WordPress\WpRocket\FileOptimization\Js\ExcludeDeferJs::class,
-                    \Woda\WordPress\WpRocket\FileOptimization\Js\ExcludeDelayJs::class,
-                    \Woda\WordPress\WpRocket\Preload\PrefetchDnsRequests::class,
-                    \Woda\WordPress\WpRocket\Preload\PreloadFonts::class,
-                    \Woda\WordPress\WpRocket\AdvancedRules\ExcludeCacheUrls::class,
-                    \Woda\WordPress\WpRocket\AdvancedRules\ExcludeCacheCookies::class,
-                    \Woda\WordPress\WpRocket\AdvancedRules\ExcludeCacheUserAgents::class,
-                    \Woda\WordPress\WpRocket\AdvancedRules\AlwaysPurgeUrls::class,
-                    \Woda\WordPress\WpRocket\AdvancedRules\ForceCacheQueryStrings::class,
-                    \Woda\WordPress\WpRocket\Cdn\CdnCnames::class,
-                    \Woda\WordPress\WpRocket\Cdn\CdnRejectFiles::class,
+                    \Woda\WordPress\WpRocket\Settings\FileOptimization\Css\ExcludeCombineAndMinifyCss::class,
+                    \Woda\WordPress\WpRocket\Settings\FileOptimization\Css\CriticalCss::class,
+                    \Woda\WordPress\WpRocket\Settings\FileOptimization\Css\CssSafelist::class,
+                    \Woda\WordPress\WpRocket\Settings\FileOptimization\Css\ExcludeAsyncCss::class,
+                    \Woda\WordPress\WpRocket\Settings\FileOptimization\Js\ExcludeCombineAndMinifyInlineJs::class,
+                    \Woda\WordPress\WpRocket\Settings\FileOptimization\Js\ExcludeCombineAndMinifyFileJs::class,
+                    \Woda\WordPress\WpRocket\Settings\FileOptimization\Js\ExcludeDeferJs::class,
+                    \Woda\WordPress\WpRocket\Settings\FileOptimization\Js\ExcludeDelayJs::class,
+                    \Woda\WordPress\WpRocket\Settings\Preload\PrefetchDnsRequests::class,
+                    \Woda\WordPress\WpRocket\Settings\Preload\PreloadFonts::class,
+                    \Woda\WordPress\WpRocket\Settings\AdvancedRules\ExcludeCacheUrls::class,
+                    \Woda\WordPress\WpRocket\Settings\AdvancedRules\ExcludeCacheCookies::class,
+                    \Woda\WordPress\WpRocket\Settings\AdvancedRules\ExcludeCacheUserAgents::class,
+                    \Woda\WordPress\WpRocket\Settings\AdvancedRules\AlwaysPurgeUrls::class,
+                    \Woda\WordPress\WpRocket\Settings\AdvancedRules\ForceCacheQueryStrings::class,
+                    \Woda\WordPress\WpRocket\Settings\Cdn\CdnCnames::class,
+                    \Woda\WordPress\WpRocket\Settings\Cdn\CdnRejectFiles::class,
                 ],
             ],
             'dependencies' => [
                 'aliases' => [],
                 'factories' => [
-                    \Woda\WordPress\WpRocket\FileOptimization\Css\ExcludeCombineAndMinifyCss::class
-                        => \Woda\WordPress\WpRocket\FileOptimization\Css\ExcludeCombineAndMinifyCssFactory::class,
-                    \Woda\WordPress\WpRocket\FileOptimization\Css\CriticalCss::class
-                        => \Woda\WordPress\WpRocket\FileOptimization\Css\CriticalCssFactory::class,
-                    \Woda\WordPress\WpRocket\FileOptimization\Css\CssSafelist::class
-                        => \Woda\WordPress\WpRocket\FileOptimization\Css\CssSafelistFactory::class,
-                    \Woda\WordPress\WpRocket\FileOptimization\Css\ExcludeAsyncCss::class
-                        => \Woda\WordPress\WpRocket\FileOptimization\Css\ExcludeAsyncCssFactory::class,
-                    \Woda\WordPress\WpRocket\FileOptimization\Js\ExcludeCombineAndMinifyInlineJs::class
-                        => \Woda\WordPress\WpRocket\FileOptimization\Js\ExcludeCombineAndMinifyInlineJsFactory::class,
-                    \Woda\WordPress\WpRocket\FileOptimization\Js\ExcludeCombineAndMinifyFileJs::class
-                        => \Woda\WordPress\WpRocket\FileOptimization\Js\ExcludeCombineAndMinifyFileJsFactory::class,
-                    \Woda\WordPress\WpRocket\FileOptimization\Js\ExcludeDeferJs::class
-                        => \Woda\WordPress\WpRocket\FileOptimization\Js\ExcludeDeferJsFactory::class,
-                    \Woda\WordPress\WpRocket\FileOptimization\Js\ExcludeDelayJs::class
-                        => \Woda\WordPress\WpRocket\FileOptimization\Js\ExcludeDelayJsFactory::class,
-                    \Woda\WordPress\WpRocket\Preload\PrefetchDnsRequests::class
-                        => \Woda\WordPress\WpRocket\Preload\PrefetchDnsRequestsFactory::class,
-                    \Woda\WordPress\WpRocket\Preload\PreloadFonts::class
-                        => \Woda\WordPress\WpRocket\Preload\PreloadFontsFactory::class,
-                    \Woda\WordPress\WpRocket\AdvancedRules\ExcludeCacheUrls::class
-                        => \Woda\WordPress\WpRocket\AdvancedRules\ExcludeCacheUrlsFactory::class,
-                    \Woda\WordPress\WpRocket\AdvancedRules\ExcludeCacheCookies::class
-                        => \Woda\WordPress\WpRocket\AdvancedRules\ExcludeCacheCookiesFactory::class,
-                    \Woda\WordPress\WpRocket\AdvancedRules\ExcludeCacheUserAgents::class
-                        => \Woda\WordPress\WpRocket\AdvancedRules\ExcludeCacheUserAgentsFactory::class,
-                    \Woda\WordPress\WpRocket\AdvancedRules\AlwaysPurgeUrls::class
-                        => \Woda\WordPress\WpRocket\AdvancedRules\AlwaysPurgeUrlsFactory::class,
-                    \Woda\WordPress\WpRocket\AdvancedRules\ForceCacheQueryStrings::class
-                        => \Woda\WordPress\WpRocket\AdvancedRules\ForceCacheQueryStringsFactory::class,
-                    \Woda\WordPress\WpRocket\Cdn\CdnCnames::class
-                        => \Woda\WordPress\WpRocket\Cdn\CdnCnamesFactory::class,
-                    \Woda\WordPress\WpRocket\Cdn\CdnRejectFiles::class
-                        => \Woda\WordPress\WpRocket\Cdn\CdnRejectFilesFactory::class,
+                    \Woda\WordPress\WpRocket\Settings\FileOptimization\Css\ExcludeCombineAndMinifyCss::class
+                        => \Woda\WordPress\WpRocket\Settings\FileOptimization\Css\ExcludeCombineAndMinifyCssFactory::class, // phpcs:ignore Generic.Files.LineLength
+                    \Woda\WordPress\WpRocket\Settings\FileOptimization\Css\CriticalCss::class
+                        => \Woda\WordPress\WpRocket\Settings\FileOptimization\Css\CriticalCssFactory::class,
+                    \Woda\WordPress\WpRocket\Settings\FileOptimization\Css\CssSafelist::class
+                        => \Woda\WordPress\WpRocket\Settings\FileOptimization\Css\CssSafelistFactory::class,
+                    \Woda\WordPress\WpRocket\Settings\FileOptimization\Css\ExcludeAsyncCss::class
+                        => \Woda\WordPress\WpRocket\Settings\FileOptimization\Css\ExcludeAsyncCssFactory::class,
+                    \Woda\WordPress\WpRocket\Settings\FileOptimization\Js\ExcludeCombineAndMinifyInlineJs::class
+                        => \Woda\WordPress\WpRocket\Settings\FileOptimization\Js\ExcludeCombineAndMinifyInlineJsFactory::class, // phpcs:ignore Generic.Files.LineLength
+                    \Woda\WordPress\WpRocket\Settings\FileOptimization\Js\ExcludeCombineAndMinifyFileJs::class
+                        => \Woda\WordPress\WpRocket\Settings\FileOptimization\Js\ExcludeCombineAndMinifyFileJsFactory::class, // phpcs:ignore Generic.Files.LineLength
+                    \Woda\WordPress\WpRocket\Settings\FileOptimization\Js\ExcludeDeferJs::class
+                        => \Woda\WordPress\WpRocket\Settings\FileOptimization\Js\ExcludeDeferJsFactory::class,
+                    \Woda\WordPress\WpRocket\Settings\FileOptimization\Js\ExcludeDelayJs::class
+                        => \Woda\WordPress\WpRocket\Settings\FileOptimization\Js\ExcludeDelayJsFactory::class,
+                    \Woda\WordPress\WpRocket\Settings\Preload\PrefetchDnsRequests::class
+                        => \Woda\WordPress\WpRocket\Settings\Preload\PrefetchDnsRequestsFactory::class,
+                    \Woda\WordPress\WpRocket\Settings\Preload\PreloadFonts::class
+                        => \Woda\WordPress\WpRocket\Settings\Preload\PreloadFontsFactory::class,
+                    \Woda\WordPress\WpRocket\Settings\AdvancedRules\ExcludeCacheUrls::class
+                        => \Woda\WordPress\WpRocket\Settings\AdvancedRules\ExcludeCacheUrlsFactory::class,
+                    \Woda\WordPress\WpRocket\Settings\AdvancedRules\ExcludeCacheCookies::class
+                        => \Woda\WordPress\WpRocket\Settings\AdvancedRules\ExcludeCacheCookiesFactory::class,
+                    \Woda\WordPress\WpRocket\Settings\AdvancedRules\ExcludeCacheUserAgents::class
+                        => \Woda\WordPress\WpRocket\Settings\AdvancedRules\ExcludeCacheUserAgentsFactory::class,
+                    \Woda\WordPress\WpRocket\Settings\AdvancedRules\AlwaysPurgeUrls::class
+                        => \Woda\WordPress\WpRocket\Settings\AdvancedRules\AlwaysPurgeUrlsFactory::class,
+                    \Woda\WordPress\WpRocket\Settings\AdvancedRules\ForceCacheQueryStrings::class
+                        => \Woda\WordPress\WpRocket\Settings\AdvancedRules\ForceCacheQueryStringsFactory::class,
+                    \Woda\WordPress\WpRocket\Settings\Cdn\CdnCnames::class
+                        => \Woda\WordPress\WpRocket\Settings\Cdn\CdnCnamesFactory::class,
+                    \Woda\WordPress\WpRocket\Settings\Cdn\CdnRejectFiles::class
+                        => \Woda\WordPress\WpRocket\Settings\Cdn\CdnRejectFilesFactory::class,
                 ],
             ],
         ];

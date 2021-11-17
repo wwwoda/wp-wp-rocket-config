@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Woda\WordPress\WpRocket\FileOptimization\Js;
+namespace Woda\WordPress\WpRocket\Settings\FileOptimization\Js;
 
-use Woda\WordPress\WpRocket\AbstractArrayMerger;
+use Woda\WordPress\WpRocket\Settings\AbstractArrayMerger;
 
 class ExcludeCombineAndMinifyFileJs extends AbstractArrayMerger
 {

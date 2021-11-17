@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Woda\WordPress\WpRocket\Cdn;
+namespace Woda\WordPress\WpRocket\Settings\Cdn;
 
-use Woda\WordPress\WpRocket\AbstractArrayMerger;
+use Woda\WordPress\WpRocket\Settings\AbstractArrayMerger;
 
 class CdnCnames extends AbstractArrayMerger
 {

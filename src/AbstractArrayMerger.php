@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Woda\WordPress\WpRocket;
+namespace Woda\WordPress\WpRocket\Settings;
 
 use Woda\WordPress\Hook\HookCallbackProviderInterface;
 

@@ -29,13 +29,13 @@
     },
     "autoload": {
         "psr-4": {
-            "Woda\\WordPress\\WpRocket\\": "src"
+            "Woda\\WordPress\\WpRocket\\Settings\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Woda\\Test\\Functional\\WpRocket\\": "tests/functional",
-            "Woda\\Test\\Unit\\WpRocket\\": "tests/unit"
+            "Woda\\Test\\Functional\\WpRocket\\Settings\\": "tests/functional",
+            "Woda\\Test\\Unit\\WpRocket\\Settings\\": "tests/unit"
         }
     },
     "repositories": [
