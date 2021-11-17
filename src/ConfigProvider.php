@@ -126,6 +126,7 @@ final class ConfigProvider
                      * for example: /wp-content/plugins/some-plugin/(.*).css
                      */
                     'cdn-file-exclusions' => [],
+                    'cdn-file-exclusions-merge' => true,
                 ],
             ],
             'hook' => [
