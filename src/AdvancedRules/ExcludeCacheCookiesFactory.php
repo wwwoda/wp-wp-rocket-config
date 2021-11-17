@@ -13,8 +13,8 @@ class ExcludeCacheCookiesFactory
     {
         $config = Config::get($container);
         return new ExcludeCacheCookies(
-            $config->array('wp-rocket/advanced-rules/never-cache-cookies'),
-            $config->bool('wp-rocket/advanced-rules/never-cache-cookies-merge')
+            $config->array('wp_rocket/advanced_rules/never_cache_cookies'),
+            $config->bool('wp_rocket/advanced_rules/never_cache_cookies_merge')
         );
     }
 }

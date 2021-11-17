@@ -13,8 +13,8 @@ class PrefetchDnsRequestsFactory
     {
         $config = Config::get($container);
         return new PrefetchDnsRequests(
-            $config->array('wp-rocket/preload/prefetch-urls'),
-            $config->bool('wp-rocket/preload/prefetch-urls-merge'),
+            $config->array('wp_rocket/preload/prefetch_urls'),
+            $config->bool('wp_rocket/preload/prefetch_urls_merge'),
         );
     }
 }

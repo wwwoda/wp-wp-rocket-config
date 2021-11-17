@@ -13,8 +13,8 @@ class ExcludeCacheUrlsFactory
     {
         $config = Config::get($container);
         return new ExcludeCacheUrls(
-            $config->array('wp-rocket/advanced-rules/never-cache-urls'),
-            $config->bool('wp-rocket/advanced-rules/never-cache-urls-merge')
+            $config->array('wp_rocket/advanced_rules/never_cache_urls'),
+            $config->bool('wp_rocket/advanced_rules/never_cache_urls_merge')
         );
     }
 }

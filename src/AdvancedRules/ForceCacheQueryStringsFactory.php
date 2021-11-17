@@ -13,8 +13,8 @@ class ForceCacheQueryStringsFactory
     {
         $config = Config::get($container);
         return new ForceCacheQueryStrings(
-            $config->array('wp-rocket/advanced-rules/force-cache-query-strings'),
-            $config->bool('wp-rocket/advanced-rules/force-cache-query-strings-merge')
+            $config->array('wp_rocket/advanced_rules/force_cache_query_strings'),
+            $config->bool('wp_rocket/advanced_rules/force_cache_query_strings_merge')
         );
     }
 }

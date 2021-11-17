@@ -13,8 +13,8 @@ class PreloadFontsFactory
     {
         $config = Config::get($container);
         return new PreloadFonts(
-            $config->array('wp-rocket/preload/preload-fonts'),
-            $config->bool('wp-rocket/preload/preload-fonts-merge'),
+            $config->array('wp_rocket/preload/preload_fonts'),
+            $config->bool('wp_rocket/preload/preload_fonts_merge'),
         );
     }
 }

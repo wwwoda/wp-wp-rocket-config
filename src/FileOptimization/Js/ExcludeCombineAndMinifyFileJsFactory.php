@@ -13,8 +13,8 @@ class ExcludeCombineAndMinifyFileJsFactory
     {
         $config = Config::get($container);
         return new ExcludeCombineAndMinifyFileJs(
-            $config->array('wp-rocket/file-optimization/js/combine-file-js-exclusions'),
-            $config->bool('wp-rocket/file-optimization/js/combine-file-js-exclusions-merge')
+            $config->array('wp_rocket/file_optimization/js/combine_file_js_exclusions'),
+            $config->bool('wp_rocket/file_optimization/js/combine_file_js_exclusions_merge')
         );
     }
 }

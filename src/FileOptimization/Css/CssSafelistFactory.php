@@ -13,8 +13,8 @@ class CssSafelistFactory
     {
         $config = Config::get($container);
         return new CssSafelist(
-            $config->array('wp-rocket/file-optimization/css/css-safelist'),
-            $config->bool('wp-rocket/file-optimization/css/css-safelist-merge')
+            $config->array('wp_rocket/file_optimization/css/css_safelist'),
+            $config->bool('wp_rocket/file_optimization/css/css_safelist_merge')
         );
     }
 }

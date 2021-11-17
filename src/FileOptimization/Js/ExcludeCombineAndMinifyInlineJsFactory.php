@@ -13,8 +13,8 @@ class ExcludeCombineAndMinifyInlineJsFactory
     {
         $config = Config::get($container);
         return new ExcludeCombineAndMinifyInlineJs(
-            $config->array('wp-rocket/file-optimization/js/combine-inline-js-exclusions'),
-            $config->bool('wp-rocket/file-optimization/js/combine-inline-js-exclusions-merge')
+            $config->array('wp_rocket/file_optimization/js/combine_inline_js_exclusions'),
+            $config->bool('wp_rocket/file_optimization/js/combine_inline_js_exclusions_merge')
         );
     }
 }

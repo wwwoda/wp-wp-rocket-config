@@ -13,8 +13,8 @@ class ExcludeCacheUserAgentsFactory
     {
         $config = Config::get($container);
         return new ExcludeCacheUserAgents(
-            $config->array('wp-rocket/advanced-rules/never-cache-user-agents'),
-            $config->bool('wp-rocket/advanced-rules/never-cache-user-agents-merge')
+            $config->array('wp_rocket/advanced_rules/never_cache_user_agents'),
+            $config->bool('wp_rocket/advanced_rules/never_cache_user_agents_merge')
         );
     }
 }

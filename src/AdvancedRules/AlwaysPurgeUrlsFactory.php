@@ -12,6 +12,6 @@ class AlwaysPurgeUrlsFactory
     public function __invoke(ContainerInterface $container): AlwaysPurgeUrls
     {
         $config = Config::get($container);
-        return new AlwaysPurgeUrls($config->array('wp-rocket/advanced-rules/always-purge-urls'));
+        return new AlwaysPurgeUrls($config->array('wp_rocket/advanced_rules/always_purge_urls'));
     }
 }
