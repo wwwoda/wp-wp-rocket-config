@@ -12,12 +12,12 @@ use function array_unique;
 
 abstract class AbstractArrayMerger implements HookCallbackProviderInterface
 {
-    /** @var list<string> */
+    /** @var array<array-key, mixed> */
     private array $strings;
     private bool $merge;
 
     /**
-     * @param list<string> $strings
+     * @param array<array-key, mixed> $strings
      */
     public function __construct(array $strings = [], bool $merge = true)
     {
@@ -26,16 +26,23 @@ abstract class AbstractArrayMerger implements HookCallbackProviderInterface
     }
 
     /**
-     * @param list<string> $strings
-     * @return list<string>
+     * @param array<array-key, mixed> $strings
+     * @return array<array-key, mixed>
      */
-    public function mergeArrays(array $strings): array
+    public function maybeMergeSetting(array $strings): array
     {
-        if ($this->strings === []) {
+        if ($this->merge === false || $this->strings === []) {
             return $strings;
         }
-        return $this->merge === true
-            ? array_filter(array_unique(array_merge($strings, $this->strings)))
-            : $this->strings;
+        return array_filter(array_unique(array_merge($strings, $this->strings)));
+    }
+
+    /**
+     * @param array<array-key, mixed> $strings
+     * @return array<array-key, mixed>
+     */
+    public function maybeOverwriteSetting(array $strings): array
+    {
+        return $this->merge === true ? $strings : array_unique($this->strings);
     }
 }

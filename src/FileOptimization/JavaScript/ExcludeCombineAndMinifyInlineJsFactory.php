@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Woda\WordPress\WpRocket\Settings\FileOptimization\Js;
+namespace Woda\WordPress\WpRocket\Settings\FileOptimization\JavaScript;
 
 use Psr\Container\ContainerInterface;
 use Woda\WordPress\Config\Config;

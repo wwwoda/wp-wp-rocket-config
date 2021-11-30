@@ -10,6 +10,7 @@ class PrefetchDnsRequests extends AbstractArrayMerger
 {
     public function registerCallbacks(): void
     {
-        add_filter('rocket_dns_prefetch', [$this, 'mergeArrays']);
+        add_filter('rocket_dns_prefetch', [$this, 'maybeMergeSetting']);
+        add_filter('get_rocket_option_dns_prefetch', [$this, 'maybeOverwriteSetting']);
     }
 }

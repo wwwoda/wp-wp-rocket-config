@@ -10,6 +10,7 @@ class CdnRejectFiles extends AbstractArrayMerger
 {
     public function registerCallbacks(): void
     {
-        add_filter('rocket_cdn_reject_files', [$this, 'mergeArrays']);
+        add_filter('rocket_cdn_reject_files', [$this, 'maybeMergeSetting']);
+        add_filter('get_rocket_option_cdn_reject_files', [$this, 'maybeOverwriteSetting']);
     }
 }
