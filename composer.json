@@ -1,11 +1,7 @@
 {
   "name": "woda/wp-wp-rocket-settings",
   "type": "library",
-  "description": "",
-  "keywords": [
-    "wordpress",
-    "module"
-  ],
+  "description": "Configure WP-Rocket plugin",
   "license": "MIT",
   "homepage": "https://github.com/wwwoda/wp-wp-rocket-settings",
   "authors": [
@@ -32,27 +28,6 @@
     "issues": "https://github.com/wwwoda/wp-wp-rocket-settings/issues",
     "source": "https://github.com/wwwoda/wp-wp-rocket-settings"
   },
-  "autoload": {
-    "psr-4": {
-      "Woda\\WordPress\\WpRocket\\Settings\\": "src"
-    }
-  },
-  "autoload-dev": {
-    "psr-4": {
-      "Woda\\Test\\Functional\\WpRocket\\Settings\\": "tests/functional",
-      "Woda\\Test\\Unit\\WpRocket\\Settings\\": "tests/unit"
-    }
-  },
-  "repositories": [
-    {
-      "type": "composer",
-      "url": "https://wpackagist.org"
-    },
-    {
-      "type": "composer",
-      "url": "https://woda.repo.repman.io"
-    }
-  ],
   "require": {
     "php": "^7.4",
     "woda/wp-config": "^1.0",
@@ -74,11 +49,31 @@
   "config": {
     "sort-packages": true
   },
+  "autoload": {
+    "psr-4": {
+      "Woda\\WordPress\\WpRocket\\Settings\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Woda\\Test\\Functional\\WpRocket\\Settings\\": "tests/functional",
+      "Woda\\Test\\Unit\\WpRocket\\Settings\\": "tests/unit"
+    }
+  },
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://woda.repo.repman.io"
+    }
+  ],
+  "minimum-stability": "stable",
   "scripts": {
     "check": [
       "@check-deps",
       "@cs-check",
-      "@phpstan"
+      "@phpstan",
+      "@phpunit",
+      "@infection"
     ],
     "check-deps": "vendor/bin/composer-require-checker --config-file=require-checker.config.json",
     "cs-check": "vendor/bin/phpcs",
