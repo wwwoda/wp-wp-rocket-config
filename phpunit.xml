@@ -7,10 +7,10 @@
     verbose="true"
 >
     <testsuites>
-        <testsuite name="Woda\WordPress\Theme\Unit">
+        <testsuite name="Woda\Test\Unit\WpRocket\Settings">
             <directory>tests/unit</directory>
         </testsuite>
-        <testsuite name="Woda\WordPress\Theme\Functional">
+        <testsuite name="Woda\Test\Functional\WpRocket\Settings">
             <directory>tests/functional</directory>
         </testsuite>
     </testsuites>

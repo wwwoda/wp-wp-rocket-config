@@ -6,21 +6,26 @@
     "wordpress",
     "module"
   ],
-  "license": "GPLv3",
+  "license": "MIT",
   "homepage": "https://github.com/wwwoda/wp-wp-rocket-settings",
   "authors": [
     {
       "name": "Woda",
       "email": "hello@woda.at",
-      "homepage": "https://www.woda.at"
+      "homepage": "https://www.woda.at",
+      "role": "Company"
     },
     {
       "name": "David Mondok",
-      "email": "david@woda.at"
+      "email": "david@woda.at",
+      "homepage": "https://github.com/davidmondok",
+      "role": "Developer"
     },
     {
       "name": "Wolfgang Schaefer",
-      "email": "wolfgang@woda.at"
+      "email": "wolfgang@woda.at",
+      "homepage": "https://github.com/wolfgangschaefer",
+      "role": "Developer"
     }
   ],
   "support": {
@@ -55,17 +60,16 @@
   },
   "require-dev": {
     "roave/security-advisories": "dev-latest",
-    "eventjet/coding-standard": "^3.2",
-    "infection/infection": "^0.20.0",
-    "maglnet/composer-require-checker": "^2.1",
-    "phpstan/extension-installer": "^1.1",
-    "phpstan/phpstan": "^1.2.0",
-    "phpstan/phpstan-phpunit": "^1.0.0",
-    "phpstan/phpstan-strict-rules": "^1.1.0",
-    "phpunit/phpunit": "^9.3",
+    "eventjet/coding-standard": "^3.7",
+    "infection/infection": "^0.25.3",
+    "maglnet/composer-require-checker": "^3.5",
+    "phpstan/extension-installer": "^1.0",
+    "phpstan/phpstan": "^1.2",
+    "phpstan/phpstan-phpunit": "^1.0",
+    "phpstan/phpstan-strict-rules": "^1.1",
+    "phpunit/phpunit": "^9.5",
     "szepeviktor/phpstan-wordpress": "^1.0.2",
-    "thecodingmachine/phpstan-safe-rule": "^1.0.1",
-    "woda/wp-test-double": "v1.x-dev"
+    "thecodingmachine/phpstan-safe-rule": "^1.0.1"
   },
   "config": {
     "sort-packages": true
@@ -76,11 +80,11 @@
       "@cs-check",
       "@phpstan"
     ],
-    "check-deps": "vendor/bin/composer-require-checker check --config-file=require-checker.config.json",
+    "check-deps": "vendor/bin/composer-require-checker --config-file=require-checker.config.json",
     "cs-check": "vendor/bin/phpcs",
     "cs-fix": "vendor/bin/phpcbf",
-    "infection": "vendor/bin/infection --threads=4",
-    "infection-xdebug": "@composer run --timeout=0 infection -- --initial-tests-php-options='-d zend_extension=xdebug.so'",
+    "infection": "vendor/bin/infection",
+    "infection-xdebug": "@composer run infection -- --initial-tests-php-options='-d zend_extension=xdebug.so'",
     "phpstan": "vendor/bin/phpstan analyse",
     "phpstan-pro": "vendor/bin/phpstan analyse --pro",
     "phpunit": "vendor/bin/phpunit"
