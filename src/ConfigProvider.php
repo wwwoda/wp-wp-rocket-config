@@ -1,50 +1,21 @@
 <?php
 
+// phpcs:disable SlevomatCodingStandard.Namespaces.UseFromSameNamespace.UseFromSameNamespace
+
+
 declare(strict_types=1);
 
 namespace Woda\WordPress\WpRocket\Settings;
 
-use Woda\WordPress\WpRocket\Settings\AdvancedRules\AlwaysPurgeUrls;
-use Woda\WordPress\WpRocket\Settings\AdvancedRules\AlwaysPurgeUrlsFactory;
-use Woda\WordPress\WpRocket\Settings\AdvancedRules\CacheQueryStrings;
-use Woda\WordPress\WpRocket\Settings\AdvancedRules\CacheQueryStringsFactory;
-use Woda\WordPress\WpRocket\Settings\AdvancedRules\NeverCacheCookies;
-use Woda\WordPress\WpRocket\Settings\AdvancedRules\NeverCacheCookiesFactory;
-use Woda\WordPress\WpRocket\Settings\AdvancedRules\NeverCacheUrls;
-use Woda\WordPress\WpRocket\Settings\AdvancedRules\NeverCacheUrlsFactory;
-use Woda\WordPress\WpRocket\Settings\AdvancedRules\NeverCacheUserAgents;
-use Woda\WordPress\WpRocket\Settings\AdvancedRules\NeverCacheUserAgentsFactory;
-use Woda\WordPress\WpRocket\Settings\Cdn\CdnCnames;
-use Woda\WordPress\WpRocket\Settings\Cdn\CdnCnamesFactory;
-use Woda\WordPress\WpRocket\Settings\Cdn\CdnRejectFiles;
-use Woda\WordPress\WpRocket\Settings\Cdn\CdnRejectFilesFactory;
-use Woda\WordPress\WpRocket\Settings\FileOptimization\Css\CriticalCss;
-use Woda\WordPress\WpRocket\Settings\FileOptimization\Css\CriticalCssFactory;
-use Woda\WordPress\WpRocket\Settings\FileOptimization\Css\CssSafelist;
-use Woda\WordPress\WpRocket\Settings\FileOptimization\Css\CssSafelistFactory;
-use Woda\WordPress\WpRocket\Settings\FileOptimization\Css\ExcludeAsyncCss;
-use Woda\WordPress\WpRocket\Settings\FileOptimization\Css\ExcludeAsyncCssFactory;
-use Woda\WordPress\WpRocket\Settings\FileOptimization\Css\ExcludeCombineAndMinifyCss;
-use Woda\WordPress\WpRocket\Settings\FileOptimization\Css\ExcludeCombineAndMinifyCssFactory;
-use Woda\WordPress\WpRocket\Settings\FileOptimization\JavaScript\ExcludeCombineAndMinifyFileJs;
-use Woda\WordPress\WpRocket\Settings\FileOptimization\JavaScript\ExcludeCombineAndMinifyFileJsFactory;
-use Woda\WordPress\WpRocket\Settings\FileOptimization\JavaScript\ExcludeCombineAndMinifyInlineJs;
-use Woda\WordPress\WpRocket\Settings\FileOptimization\JavaScript\ExcludeCombineAndMinifyInlineJsFactory;
-use Woda\WordPress\WpRocket\Settings\FileOptimization\JavaScript\ExcludeDeferJs;
-use Woda\WordPress\WpRocket\Settings\FileOptimization\JavaScript\ExcludeDeferJsFactory;
-use Woda\WordPress\WpRocket\Settings\FileOptimization\JavaScript\ExcludeDelayJs;
-use Woda\WordPress\WpRocket\Settings\FileOptimization\JavaScript\ExcludeDelayJsFactory;
-use Woda\WordPress\WpRocket\Settings\Media\ExcludeLazyload;
-use Woda\WordPress\WpRocket\Settings\Media\ExcludeLazyloadFactory;
-use Woda\WordPress\WpRocket\Settings\Preload\PrefetchDnsRequests;
-use Woda\WordPress\WpRocket\Settings\Preload\PrefetchDnsRequestsFactory;
-use Woda\WordPress\WpRocket\Settings\Preload\PreloadFonts;
-use Woda\WordPress\WpRocket\Settings\Preload\PreloadFontsFactory;
-use Woda\WordPress\WpRocket\Settings\Preload\Sitemaps;
-use Woda\WordPress\WpRocket\Settings\Preload\SitemapsFactory;
+use Woda\WordPress\WpRocket\Settings\AdvancedRules;
+use Woda\WordPress\WpRocket\Settings\Cdn;
+use Woda\WordPress\WpRocket\Settings\FileOptimization;
+use Woda\WordPress\WpRocket\Settings\Media;
+use Woda\WordPress\WpRocket\Settings\Options;
+use Woda\WordPress\WpRocket\Settings\Preload;
 
 /**
- * @phpstan-type WpRocketCacheSettings array{
+ * @phpstan-type WpRocketCacheOptions array{
  *     'cache_mobile': bool,
  *     'do_caching_mobile_files': bool,
  *     'cache_logged_user': bool,
@@ -52,42 +23,42 @@ use Woda\WordPress\WpRocket\Settings\Preload\SitemapsFactory;
  *     'purge_cron_unit': 'HOUR_IN_SECONDS'|'DAY_IN_SECONDS'
  * }
  *
- * @phpstan-type WpRocketCdnSettings array{
+ * @phpstan-type WpRocketCdnOptions array{
  *     'minify_css': bool,
  *     'minify_concatenate_css': bool,
  *     'remove_unused_css': bool,
  *     'async_css': bool,
  * }
  *
- * @phpstan-type WpRocketCssSettings array{
+ * @phpstan-type WpRocketCssOptions array{
  *     'minify_css': bool,
  *     'minify_concatenate_css': bool,
  *     'remove_unused_css': bool,
  *     'async_css': bool,
  * }
  *
- * @phpstan-type WpRocketJavaScriptSettings array{
+ * @phpstan-type WpRocketJavaScriptOptions array{
  *     'minify_js': bool,
  *     'minify_concatenate_js': bool,
  *     'defer_all_js': bool,
  *     'delay_js': bool,
  * }
  *
- * @phpstan-type WpRocketMediaSettings array{
+ * @phpstan-type WpRocketMediaOptions array{
  *     'lazyload': bool,
  *     'lazyload_iframes': bool,
  *     'lazyload_youtube': bool,
  *     'image_dimensions': bool,
  * }
  *
- * @phpstan-type WpRocketPreloadSettings array{
+ * @phpstan-type WpRocketPreloadOptions array{
  *     'manual_preload': bool,
  *     'sitemap_preload': bool,
  *     'yoast_xml_sitemap': bool,
  *     'preload_links': bool,
  * }
  *
- * @phpstan-type WpRocketDatabaseSettings array{
+ * @phpstan-type WpRocketDatabaseOptions array{
  *     'database_revisions': bool,
  *     'database_auto_drafts': bool,
  *     'database_trashed_posts': bool,
@@ -99,11 +70,11 @@ use Woda\WordPress\WpRocket\Settings\Preload\SitemapsFactory;
  *     'automatic_cleanup_frequency': 1|2|3,
  * }
  *
- * @phpstan-type WpRocketCdnSettings array{
+ * @phpstan-type WpRocketCdnOptions array{
  *     'cdn': bool,
  * }
  *
- * @phpstan-type WpRocketHeartbeatSettings array{
+ * @phpstan-type WpRocketHeartbeatOptions array{
  *     'control_heartbeat': bool,
  *     'heartbeat_admin_behavior': 1|2|3,
  *     'heartbeat_editor_behavior': 1|2|3,
@@ -120,7 +91,7 @@ final class ConfigProvider
         return [
             'wp_rocket' => [
                 'cache' => [
-                    'settings' => [
+                    'options' => [
                         /*
                          * Enable caching for mobile devices
                         */
@@ -145,7 +116,7 @@ final class ConfigProvider
                 ],
                 'file_optimization' => [
                     'css' => [
-                        'settings' => [
+                        'options' => [
                             /*
                              * Minify CSS files
                              * Set exclusions via 'combine_css_exclusions'
@@ -194,7 +165,7 @@ final class ConfigProvider
                         'fallback_critical_css' => '',
                     ],
                     'js' => [
-                        'settings' => [
+                        'options' => [
                             /*
                              * Minify JavaScript files
                              * Set exclusions 'combine_file_js_exclusions'
@@ -247,7 +218,7 @@ final class ConfigProvider
                     ],
                 ],
                 'media' => [
-                    'settings' => [
+                    'options' => [
                         /*
                          * Enable LazyLoad for images
                          */
@@ -275,7 +246,7 @@ final class ConfigProvider
                     'exclude_lazyload_merge' => true,
                 ],
                 'preload' => [
-                    'settings' => [
+                    'options' => [
                         /*
                          * Activate Preloading
                          */
@@ -345,7 +316,7 @@ final class ConfigProvider
                     'force_cache_query_strings_merge' => true,
                 ],
                 'database' => [
-                    'settings' => [
+                    'options' => [
                         /*
                          * Post Cleanup - Revisions
                          */
@@ -388,7 +359,7 @@ final class ConfigProvider
                     ],
                 ],
                 'cdn' => [
-                    'settings' => [
+                    'options' => [
                         /*
                          * Enable CDN
                          */
@@ -412,7 +383,7 @@ final class ConfigProvider
                     'cdn_file_exclusions_merge' => true,
                 ],
                 'heartbeat' => [
-                    'settings' => [
+                    'options' => [
                         /*
                          * Control heartbeat
                          */
@@ -443,63 +414,56 @@ final class ConfigProvider
             ],
             'hook' => [
                 'provider' => [
-                    Settings::class,
-                    // Advanced Rules
-                    AlwaysPurgeUrls::class,
-                    CacheQueryStrings::class,
-                    NeverCacheCookies::class,
-                    NeverCacheUrls::class,
-                    NeverCacheUserAgents::class,
-                    // Cdn
-                    CdnCnames::class,
-                    CdnRejectFiles::class,
-                    // File Optimization CSS
-                    CriticalCss::class,
-                    CssSafelist::class,
-                    ExcludeAsyncCss::class,
-                    ExcludeCombineAndMinifyCss::class,
-                    // File Optimization JavaScript
-                    ExcludeCombineAndMinifyFileJs::class,
-                    ExcludeCombineAndMinifyInlineJs::class,
-                    ExcludeDeferJs::class,
-                    ExcludeDelayJs::class,
-                    // Media
-                    ExcludeLazyload::class,
-                    // Preload
-                    PrefetchDnsRequests::class,
-                    PreloadFonts::class,
-                    Sitemaps::class,
+                    AdvancedRules\AlwaysPurgeUrls::class,
+                    AdvancedRules\CacheQueryStrings::class,
+                    AdvancedRules\NeverCacheCookies::class,
+                    AdvancedRules\NeverCacheUrls::class,
+                    AdvancedRules\NeverCacheUserAgents::class,
+                    Cdn\CdnCnames::class,
+                    Cdn\CdnRejectFiles::class,
+                    FileOptimization\Css\CriticalCss::class,
+                    FileOptimization\Css\CssSafelist::class,
+                    FileOptimization\Css\ExcludeAsyncCss::class,
+                    FileOptimization\Css\ExcludeCombineAndMinifyCss::class,
+                    FileOptimization\JavaScript\ExcludeCombineAndMinifyFileJs::class,
+                    FileOptimization\JavaScript\ExcludeCombineAndMinifyInlineJs::class,
+                    FileOptimization\JavaScript\ExcludeDeferJs::class,
+                    FileOptimization\JavaScript\ExcludeDelayJs::class,
+                    Media\ExcludeLazyload::class,
+                    Preload\PrefetchDnsRequests::class,
+                    Preload\PreloadFonts::class,
+                    Preload\Sitemaps::class,
+                    Options\Options::class,
                 ],
             ],
             'dependencies' => [
                 'aliases' => [],
                 'factories' => [
-                    Settings::class => SettingsFactory::class,
-                    // Advanced Rules
-                    AlwaysPurgeUrls::class => AlwaysPurgeUrlsFactory::class,
-                    CacheQueryStrings::class => CacheQueryStringsFactory::class,
-                    NeverCacheCookies::class => NeverCacheCookiesFactory::class,
-                    NeverCacheUrls::class => NeverCacheUrlsFactory::class,
-                    NeverCacheUserAgents::class => NeverCacheUserAgentsFactory::class,
-                    // Cdn
-                    CdnCnames::class => CdnCnamesFactory::class,
-                    CdnRejectFiles::class => CdnRejectFilesFactory::class,
-                    // File Optimization CSS
-                    CriticalCss::class => CriticalCssFactory::class,
-                    CssSafelist::class => CssSafelistFactory::class,
-                    ExcludeAsyncCss::class => ExcludeAsyncCssFactory::class,
-                    ExcludeCombineAndMinifyCss::class => ExcludeCombineAndMinifyCssFactory::class,
-                    // File Optimization JavaScript
-                    ExcludeCombineAndMinifyFileJs::class => ExcludeCombineAndMinifyFileJsFactory::class,
-                    ExcludeCombineAndMinifyInlineJs::class => ExcludeCombineAndMinifyInlineJsFactory::class,
-                    ExcludeDeferJs::class => ExcludeDeferJsFactory::class,
-                    ExcludeDelayJs::class => ExcludeDelayJsFactory::class,
-                    // Media
-                    ExcludeLazyload::class => ExcludeLazyloadFactory::class,
-                    // Preload
-                    PrefetchDnsRequests::class => PrefetchDnsRequestsFactory::class,
-                    PreloadFonts::class => PreloadFontsFactory::class,
-                    Sitemaps::class => SitemapsFactory::class,
+                    AdvancedRules\AlwaysPurgeUrls::class => AdvancedRules\AlwaysPurgeUrlsFactory::class,
+                    AdvancedRules\CacheQueryStrings::class => AdvancedRules\CacheQueryStringsFactory::class,
+                    AdvancedRules\NeverCacheCookies::class => AdvancedRules\NeverCacheCookiesFactory::class,
+                    AdvancedRules\NeverCacheUrls::class => AdvancedRules\NeverCacheUrlsFactory::class,
+                    AdvancedRules\NeverCacheUserAgents::class => AdvancedRules\NeverCacheUserAgentsFactory::class,
+                    Cdn\CdnCnames::class => Cdn\CdnCnamesFactory::class,
+                    Cdn\CdnRejectFiles::class => Cdn\CdnRejectFilesFactory::class,
+                    FileOptimization\Css\CriticalCss::class => FileOptimization\Css\CriticalCssFactory::class,
+                    FileOptimization\Css\CssSafelist::class => FileOptimization\Css\CssSafelistFactory::class,
+                    FileOptimization\Css\ExcludeAsyncCss::class => FileOptimization\Css\ExcludeAsyncCssFactory::class,
+                    FileOptimization\Css\ExcludeCombineAndMinifyCss::class
+                        => FileOptimization\Css\ExcludeCombineAndMinifyCssFactory::class,
+                    FileOptimization\JavaScript\ExcludeCombineAndMinifyFileJs::class
+                        => FileOptimization\JavaScript\ExcludeCombineAndMinifyFileJsFactory::class,
+                    FileOptimization\JavaScript\ExcludeCombineAndMinifyInlineJs::class
+                        => FileOptimization\JavaScript\ExcludeCombineAndMinifyInlineJsFactory::class,
+                    FileOptimization\JavaScript\ExcludeDeferJs::class
+                        => FileOptimization\JavaScript\ExcludeDeferJsFactory::class,
+                    FileOptimization\JavaScript\ExcludeDelayJs::class
+                        => FileOptimization\JavaScript\ExcludeDelayJsFactory::class,
+                    Media\ExcludeLazyload::class => Media\ExcludeLazyloadFactory::class,
+                    Preload\PrefetchDnsRequests::class => Preload\PrefetchDnsRequestsFactory::class,
+                    Preload\PreloadFonts::class => Preload\PreloadFontsFactory::class,
+                    Preload\Sitemaps::class => Preload\SitemapsFactory::class,
+                    Options\Options::class => Options\OptionsFactory::class,
                 ],
             ],
         ];

@@ -55,11 +55,10 @@
   ],
   "require": {
     "php": "^7.4",
-    "woda/wp-config": "v1.x-dev",
-    "woda/wp-hook": "v1.x-dev"
+    "woda/wp-config": "^1.0",
+    "woda/wp-hook": "^1.0"
   },
   "require-dev": {
-    "roave/security-advisories": "dev-latest",
     "eventjet/coding-standard": "^3.7",
     "infection/infection": "^0.25.3",
     "maglnet/composer-require-checker": "^3.5",
@@ -68,6 +67,7 @@
     "phpstan/phpstan-phpunit": "^1.0",
     "phpstan/phpstan-strict-rules": "^1.1",
     "phpunit/phpunit": "^9.5",
+    "roave/security-advisories": "dev-latest",
     "szepeviktor/phpstan-wordpress": "^1.0.2",
     "thecodingmachine/phpstan-safe-rule": "^1.0.1"
   },
