@@ -20,32 +20,32 @@ use function array_merge;
  */
 class Settings implements HookCallbackProviderInterface
 {
-    /** @var WpRocketCacheSettings  */
+    /** @phpstan-var WpRocketCacheSettings  */
     private array $cacheSettings;
-    /** @var WpRocketCssSettings */
+    /** @phpstan-var WpRocketCssSettings */
     private array $cssSettings;
-    /** @var WpRocketJavaScriptSettings */
+    /** @phpstan-var WpRocketJavaScriptSettings */
     private array $javaScriptSettings;
-    /** @var WpRocketMediaSettings */
+    /** @phpstan-var WpRocketMediaSettings */
     private array $mediaSettings;
-    /** @var WpRocketPreloadSettings */
+    /** @phpstan-var WpRocketPreloadSettings */
     private array $preloadSettings;
-    /** @var WpRocketDatabaseSettings */
+    /** @phpstan-var WpRocketDatabaseSettings */
     private array $databaseSettings;
-    /** @var WpRocketCdnSettings */
+    /** @phpstan-var WpRocketCdnSettings */
     private array $cdnSettings;
-    /** @var WpRocketHeartbeatSettings */
+    /** @phpstan-var WpRocketHeartbeatSettings */
     private array $heartbeatSettings;
 
     /**
-     * @param WpRocketCacheSettings $cacheSettings
-     * @param WpRocketCssSettings $cssSettings
-     * @param WpRocketJavaScriptSettings $javaScriptSettings
-     * @param WpRocketMediaSettings $mediaSettings
-     * @param WpRocketPreloadSettings $preloadSettings
-     * @param WpRocketDatabaseSettings $databaseSettings
-     * @param WpRocketCdnSettings $cdnSettings
-     * @param WpRocketHeartbeatSettings $heartbeatSettings
+     * @phpstan-param WpRocketCacheSettings $cacheSettings
+     * @phpstan-param WpRocketCssSettings $cssSettings
+     * @phpstan-param WpRocketJavaScriptSettings $javaScriptSettings
+     * @phpstan-param WpRocketMediaSettings $mediaSettings
+     * @phpstan-param WpRocketPreloadSettings $preloadSettings
+     * @phpstan-param WpRocketDatabaseSettings $databaseSettings
+     * @phpstan-param WpRocketCdnSettings $cdnSettings
+     * @phpstan-param WpRocketHeartbeatSettings $heartbeatSettings
      */
     public function __construct(
         array $cacheSettings,
