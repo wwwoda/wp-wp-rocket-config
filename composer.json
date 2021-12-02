@@ -71,9 +71,7 @@
     "check": [
       "@check-deps",
       "@cs-check",
-      "@phpstan",
-      "@phpunit",
-      "@infection"
+      "@phpstan"
     ],
     "check-deps": "vendor/bin/composer-require-checker --config-file=require-checker.config.json",
     "cs-check": "vendor/bin/phpcs",
