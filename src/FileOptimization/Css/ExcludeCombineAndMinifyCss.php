@@ -10,6 +10,7 @@ class ExcludeCombineAndMinifyCss extends AbstractArrayMerger
 {
     public function registerCallbacks(): void
     {
-        add_filter('rocket_exclude_css', [$this, 'mergeArrays'], 10);
+        add_filter('rocket_exclude_css', [$this, 'maybeMergeSetting']);
+        add_filter('get_rocket_option_exclude_css', [$this, 'maybeOverwriteSetting']);
     }
 }

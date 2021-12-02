@@ -10,6 +10,6 @@ class ExcludeAsyncCss extends AbstractArrayMerger
 {
     public function registerCallbacks(): void
     {
-        add_filter('rocket_exclude_async_css', [$this, 'mergeArrays'], 10);
+        add_filter('rocket_exclude_async_css', [$this, 'maybeMergeSetting']);
     }
 }

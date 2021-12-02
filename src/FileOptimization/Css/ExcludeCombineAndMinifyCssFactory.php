@@ -13,8 +13,8 @@ class ExcludeCombineAndMinifyCssFactory
     {
         $config = Config::get($container);
         return new ExcludeCombineAndMinifyCss(
-            $config->array('wp-rocket/file-optimization/css/combine-css-exclusions'),
-            $config->bool('wp-rocket/file-optimization/css/combine-css-exclusions-merge')
+            $config->array('wp_rocket/file_optimization/css/combine_css_exclusions'),
+            $config->bool('wp_rocket/file_optimization/css/combine_css_exclusions_merge')
         );
     }
 }

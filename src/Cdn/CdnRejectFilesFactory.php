@@ -13,8 +13,8 @@ class CdnRejectFilesFactory
     {
         $config = Config::get($container);
         return new CdnRejectFiles(
-            $config->array('wp-rocket/cdn/cdn-file-exclusions'),
-            $config->bool('wp-rocket/cdn/cdn-file-exclusions-merge')
+            $config->array('wp_rocket/cdn/cdn_file_exclusions'),
+            $config->bool('wp_rocket/cdn/cdn_file_exclusions_merge')
         );
     }
 }

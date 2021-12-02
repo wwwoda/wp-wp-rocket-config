@@ -1,25 +1,11 @@
-# WordPress Plugin - Woda {Plugin Name}
+# woda/wp-wp-rocket-settings
 
-> One liner that explains the plugin
+Configure [WP Rocket](https://wp-rocket.me/) plugin.
 
-## Installation
-
-You can install the plugin by uploading it in the WordPress Admin or via `composer`.
+## Install
 
 ```bash
-composer require woda/wp-{plugin-name}
+composer require woda/wp-wp-rocket-settings
 ```
 
-If you installed the plugin via `composer` you will have to initialize it yourself to be able to use it. Add this to your theme's function file
-
-```php
-Woda\WordPress\{PluginName}\Init::init($settings);
-```
-
-## Configure
-
-```php
-add_filter('woda_{plugin_name}_settings', static function($settings) {
-    return [];
-}, 10, 1);
-```
+## Usage

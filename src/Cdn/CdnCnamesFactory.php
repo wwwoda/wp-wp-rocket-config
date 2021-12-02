@@ -12,6 +12,9 @@ class CdnCnamesFactory
     public function __invoke(ContainerInterface $container): CdnCnames
     {
         $config = Config::get($container);
-        return new CdnCnames($config->array('wp-rocket/cdn/cnames'), true);
+        return new CdnCnames(
+            $config->array('wp_rocket/cdn/cnames'),
+            $config->bool('wp_rocket/cdn/lock_cnames')
+        );
     }
 }
