@@ -31,8 +31,10 @@ abstract class AbstractArrayMerger implements HookCallbackProviderInterface
      */
     public function maybeMergeSetting(array $strings): array
     {
-        if ($this->merge === false || $this->strings === []) {
-            return $strings;
+        if ($this->merge === false) {
+            return $this->strings === []
+                ? $strings
+                : $this->strings;
         }
         return array_filter(array_unique(array_merge($strings, $this->strings)));
     }
