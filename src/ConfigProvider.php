@@ -147,6 +147,8 @@ final class ConfigProvider
                         'combine_css_exclusions_merge' => true,
                         /*
                          * Documentation missing
+                         * Only paths will work here. You can't use handles or anything to exclude files by.
+                         * 'fallback_critical_css' must not be empty for this filter to work.
                          */
                         'async_css_exclusions' => [],
                         'async_css_exclusions_merge' => true,
