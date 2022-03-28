@@ -12,6 +12,10 @@ class CriticalCssFactory
     public function __invoke(ContainerInterface $container): CriticalCss
     {
         $config = Config::get($container);
-        return new CriticalCss($config->string('wp_rocket/file_optimization/css/fallback_critical_css'));
+        return new CriticalCss(
+            $config->string('wp_rocket/file_optimization/css/fallback_critical_css'),
+            $config->bool('wp_rocket/file_optimization/css/fallback_critical_css_disable_field'),
+            $config->array('wp_rocket/file_optimization/css/async_css_exclusions')
+        );
     }
 }

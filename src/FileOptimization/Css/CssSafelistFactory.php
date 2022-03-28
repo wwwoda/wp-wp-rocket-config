@@ -13,8 +13,10 @@ class CssSafelistFactory
     {
         $config = Config::get($container);
         return new CssSafelist(
+            'remove_unused_css_safelist',
             $config->array('wp_rocket/file_optimization/css/css_safelist'),
-            $config->bool('wp_rocket/file_optimization/css/css_safelist_merge')
+            $config->bool('wp_rocket/file_optimization/css/css_safelist_disable_field'),
+            $config->string('wp_rocket/disabled_field_classname')
         );
     }
 }

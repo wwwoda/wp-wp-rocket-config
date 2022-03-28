@@ -13,8 +13,10 @@ class ExcludeDelayJsFactory
     {
         $config = Config::get($container);
         return new ExcludeDelayJs(
+            'delay_js_exclusions',
             $config->array('wp_rocket/file_optimization/js/delay_js_exclusions'),
-            $config->bool('wp_rocket/file_optimization/js/delay_js_exclusions_merge')
+            $config->bool('wp_rocket/file_optimization/js/delay_js_exclusions_disable_field'),
+            $config->string('wp_rocket/disabled_field_classname')
         );
     }
 }

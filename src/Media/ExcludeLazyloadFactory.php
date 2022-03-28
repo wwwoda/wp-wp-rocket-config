@@ -13,8 +13,10 @@ class ExcludeLazyloadFactory
     {
         $config = Config::get($container);
         return new ExcludeLazyload(
+            'exclude_lazyload',
             $config->array('wp_rocket/media/exclude_lazyload'),
-            $config->bool('wp_rocket/media/exclude_lazyload_merge'),
+            $config->bool('wp_rocket/media/exclude_lazyload_disable_field'),
+            $config->string('wp_rocket/disabled_field_classname')
         );
     }
 }

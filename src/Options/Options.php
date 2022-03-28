@@ -21,7 +21,7 @@ use function array_merge;
  */
 class Options implements HookCallbackProviderInterface
 {
-    /** @phpstan-var WpRocketCacheOptions  */
+    /** @phpstan-var WpRocketCacheOptions */
     private array $cacheOptions;
     /** @phpstan-var WpRocketCssOptions */
     private array $cssOptions;
@@ -37,6 +37,8 @@ class Options implements HookCallbackProviderInterface
     private array $cdnOptions;
     /** @phpstan-var WpRocketHeartbeatOptions */
     private array $heartbeatOptions;
+    /** @var list<string> */
+    private array $keys;
 
     /**
      * @phpstan-param WpRocketCacheOptions $cacheOptions
@@ -66,26 +68,25 @@ class Options implements HookCallbackProviderInterface
         $this->databaseOptions = $databaseOptions;
         $this->cdnOptions = $cdnOptions;
         $this->heartbeatOptions = $heartbeatOptions;
+        $this->keys = array_keys($this->getMergedOptions());
     }
 
     public function registerCallbacks(): void
     {
-        $options = array_merge(
-            $this->cacheOptions,
-            $this->cssOptions,
-            $this->javaScriptOptions,
-            $this->mediaOptions,
-            $this->preloadOptions,
-            $this->databaseOptions,
-            $this->cdnOptions,
-            $this->heartbeatOptions
-        );
-        foreach ($options as $key => $value) {
+        foreach ($this->getMergedOptions() as $key => $value) {
             add_filter('pre_get_rocket_option_' . $key, fn() => $this->getOptionValue(
                 $key,
                 $value
             ));
         }
+        if (
+            !in_array('remove_unused_css', $this->keys)
+            && isset($this->cssOptions['async_css'])
+            && $this->cssOptions['async_css'] === true
+        ) {
+            add_filter('pre_get_rocket_option_remove_unused_css', '__return_false');
+        }
+        add_filter('rocket_before_add_field_to_settings', [$this, 'maybeDisableField']);
     }
 
     /**
@@ -95,6 +96,16 @@ class Options implements HookCallbackProviderInterface
     public function getOptionValue(string $key, $value)
     {
         switch ($key) {
+            case 'optimize_css_delivery':
+                return $this->getOptimizeCssDelivery((bool)$value);
+            case 'remove_unused_css':
+                if (
+                    !isset($this->cssOptions['remove_unused_css'])
+                    && isset($this->cssOptions['async_css'])
+                ) {
+                    return false;
+                }
+                return $value;
             case 'async_css':
                 return $this->getAsyncCssOption((bool)$value);
             case 'automatic_cleanup_frequency':
@@ -112,11 +123,43 @@ class Options implements HookCallbackProviderInterface
         }
     }
 
+    /**
+     * @param array<string, mixed> $settings
+     * @return array<string, mixed>
+     */
+    public function maybeDisableField(array $fieldSettings): array
+    {
+        if ($fieldSettings['id'] === 'optimize_css_delivery') {
+            return $this->getOptimizeCssDeliverFieldSettings($fieldSettings);
+        }
+        if ($fieldSettings['id'] === 'optimize_css_delivery_method') {
+            return $this->getOptimizeCssDeliverMethodFieldSettings($fieldSettings);
+        }
+        if (!in_array($fieldSettings['id'], $this->keys)) {
+            return $fieldSettings;
+        }
+        return $this->addDisableAttrToFieldSettings($fieldSettings);
+    }
+
+    private function getOptimizeCssDelivery(bool $value): bool
+    {
+        $removeUnusedCss = isset($this->cssOptions['remove_unused_css']) ? $this->cssOptions['remove_unused_css'] : null;
+        $asyncCss = isset($this->cssOptions['async_css']) ? $this->cssOptions['async_css'] : null;
+        if ($removeUnusedCss === null && $asyncCss === null) {
+            return $value;
+        }
+        if ($removeUnusedCss !== true && $asyncCss !== true) {
+            return false;
+        }
+        return true;
+    }
+
     private function getAsyncCssOption(bool $value): bool
     {
-        return isset($this->cssOptions['remove_unused_css']) && $this->cssOptions['remove_unused_css'] === true
-            ? false
-            : $value;
+        if (isset($this->cssOptions['remove_unused_css']) && $this->cssOptions['remove_unused_css'] === true) {
+            return false;
+        }
+        return $value;
     }
 
     /**
@@ -162,5 +205,64 @@ class Options implements HookCallbackProviderInterface
         return isset($this->javaScriptOptions['minify_js']) && $this->javaScriptOptions['minify_js'] !== true
             ? false
             : $value;
+    }
+
+    /**
+     * @param array<string, mixed> $settings
+     * @return array<string, mixed>
+     */
+    private function getOptimizeCssDeliverFieldSettings(array $fieldSettings): array
+    {
+        if (
+            isset($this->cssOptions['remove_unused_css'])
+            || isset($this->cssOptions['async_css'])
+        ) {
+            return $this->addDisableAttrToFieldSettings($fieldSettings);
+        }
+        return $fieldSettings;
+    }
+
+    /**
+     * @param array<string, mixed> $settings
+     * @return array<string, mixed>
+     */
+    private function getOptimizeCssDeliverMethodFieldSettings(array $fieldSettings): array
+    {
+        if (
+            !isset($this->cssOptions['remove_unused_css'])
+            && !isset($this->cssOptions['async_css'])
+        ) {
+            return $fieldSettings;
+        }
+        $fieldSettings['disabled'] = 'disabled';
+        return $fieldSettings;
+    }
+
+    /**
+     * @param array<string, mixed> $settings
+     * @return array<string, mixed>
+     */
+    private function addDisableAttrToFieldSettings(array $fieldSettings): array
+    {
+        if (!isset($fieldSettings['input_attr'])) {
+            $fieldSettings['input_attr']['disabled'] = 1;
+        } else {
+            $fieldSettings['input_attr'] = ['disabled' => 1];
+        }
+        return $fieldSettings;
+    }
+
+    private function getMergedOptions(): array
+    {
+        return array_merge(
+            $this->cacheOptions,
+            $this->cssOptions,
+            $this->javaScriptOptions,
+            $this->mediaOptions,
+            $this->preloadOptions,
+            $this->databaseOptions,
+            $this->cdnOptions,
+            $this->heartbeatOptions
+        );
     }
 }

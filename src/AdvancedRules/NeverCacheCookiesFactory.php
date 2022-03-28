@@ -13,8 +13,10 @@ class NeverCacheCookiesFactory
     {
         $config = Config::get($container);
         return new NeverCacheCookies(
+            'cache_reject_cookies',
             $config->array('wp_rocket/advanced_rules/never_cache_cookies'),
-            $config->bool('wp_rocket/advanced_rules/never_cache_cookies_merge')
+            $config->bool('wp_rocket/advanced_rules/never_cache_cookies_disable_field'),
+            $config->string('wp_rocket/disabled_field_classname')
         );
     }
 }

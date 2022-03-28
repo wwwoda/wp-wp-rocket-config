@@ -33,6 +33,7 @@ use Woda\WordPress\WpRocket\Settings\Preload;
  * @phpstan-type WpRocketCssOptions array{
  *     'minify_css': bool,
  *     'minify_concatenate_css': bool,
+ *     'optimize_css_delivery': bool,
  *     'remove_unused_css': bool,
  *     'async_css': bool,
  * }
@@ -144,27 +145,29 @@ final class ConfigProvider
                          * @see https://docs.wp-rocket.me/article/1104-excluding-inline-js-from-combine
                          */
                         'combine_css_exclusions' => [],
-                        'combine_css_exclusions_merge' => true,
+                        'combine_css_exclusions_disable_field' => false,
                         /*
                          * Documentation missing
-                         * Only paths will work here. You can't use handles or anything to exclude files by.
-                         * 'fallback_critical_css' must not be empty for this filter to work.
+                         * Only paths will work here.
+                         * You can't use handles or anything to exclude files by.
+                         * There is no field for this setting, therefore it can't be disabled.
                          */
                         'async_css_exclusions' => [],
-                        'async_css_exclusions_merge' => true,
+                        'async_css_exclusions_disable_field' => false,
                         /**
                          * Array of CSS filenames, IDs or classes that should not be removed while cleaning CSS files
                          * of unused CSS.
                          * @see https://docs.wp-rocket.me/article/1529-remove-unused-css?utm_source=wp_plugin&utm_medium=wp_rocket
                          */
                         'css_safelist' => [],
-                        'css_safelist_merge' => true,
+                        'css_safelist_disable_field' => false,
                         /*
                          * Fallback critical CSS
                          * Provides a fallback if auto-generated critical path CSS is incomplete.
                          * @see https://docs.wp-rocket.me/article/1266-optimize-css-delivery#fallback
                          */
                         'fallback_critical_css' => '',
+                        'fallback_critical_css_disable_field' => false,
                     ],
                     'js' => [
                         'options' => [
@@ -195,19 +198,19 @@ final class ConfigProvider
                          * @see https://docs.wp-rocket.me/article/1104-excluding-inline-js-from-combine
                          */
                         'combine_inline_js_exclusions' => [],
-                        'combine_inline_js_exclusions_merge' => true,
+                        'combine_inline_js_exclusions_disable_field' => false,
                         /*
                          * An array of URLs of JavaScript files to be excluded from minification and concatenation,
                          * for example: /wp-content/themes/some-theme/(.*).js
                          */
                         'combine_file_js_exclusions' => [],
-                        'combine_file_js_exclusions_merge' => true,
+                        'combine_file_js_exclusions_disable_field' => false,
                         /**
                          * An array of URLs or keywords of JavaScript files to be excluded from defer,
                          * for example: /wp-content/themes/some-theme/(.*).js
                          */
                         'defer_js_exclusions' => [],
-                        'defer_js_exclusions_merge' => true,
+                        'defer_js_exclusions_disable_field' => false,
                         /*
                          * An array  URLs or keywords that can identify inline or JavaScript files to be excluded from
                          * delaying execution, for example:
@@ -216,7 +219,7 @@ final class ConfigProvider
                          * (?:/app/|/wp/wp-includes/)(.*)
                          */
                         'delay_js_exclusions' => [],
-                        'delay_js_exclusions_merge' => true,
+                        'delay_js_exclusions_disable_field' => false,
                     ],
                 ],
                 'media' => [
@@ -245,7 +248,7 @@ final class ConfigProvider
                      * slider-image
                      */
                     'exclude_lazyload' => [],
-                    'exclude_lazyload_merge' => true,
+                    'exclude_lazyload_disable_field' => false,
                 ],
                 'preload' => [
                     'options' => [
@@ -271,21 +274,21 @@ final class ConfigProvider
                      * for example: https://example.com/sitemap.xml
                      */
                     'sitemaps' => [],
-                    'sitemaps_merge' => true,
+                    'sitemaps_disable_field' => false,
                     /*
                      * Prefetch DNS Requests
                      * Array of external hosts to be prefetched (URL without "http:"),
                      * for example: //example.com
                      */
                     'prefetch_urls' => [],
-                    'prefetch_urls_merge' => true,
+                    'prefetch_urls_disable_field' => false,
                     /*
                      * Preload Fonts
                      * Array of URLs of the font files to be preloaded,
                      * for example: /wp-content/themes/your-theme/assets/fonts/font-file.woff
                      */
                     'preload_fonts' => [],
-                    'preload_fonts_merge' => true,
+                    'preload_fonts_disable_field' => false,
                 ],
                 'advanced_rules' => [
                     /*
@@ -293,29 +296,29 @@ final class ConfigProvider
                      * for example: /example/(.*)
                      */
                     'never_cache_urls' => [],
-                    'never_cache_urls_merge' => true,
+                    'never_cache_urls_disable_field' => false,
                     /*
                      * An array of full or partial IDs of cookies that, when set in the visitor's browser,
                      * should prevent a page from getting cached.
                      */
                     'never_cache_cookies' => [],
-                    'never_cache_cookies_merge' => true,
+                    'never_cache_cookies_disable_field' => false,
                     /**
                      * An array of user agent strings that should never see cached pages.
                      */
                     'never_cache_user_agents' => [],
-                    'never_cache_user_agents_merge' => true,
+                    'never_cache_user_agents_disable_field' => false,
                     /*
                      * An array of URLs you always want purged from cache whenever you update any post or page.
                      */
                     'always_purge_urls' => [],
-                    'always_purge_urls_merge' => true,
+                    'always_purge_urls_disable_field' => false,
                     /*
                      * An array of GET parameters to force caching for.
                      * @see https://docs.wp-rocket.me/article/971-caching-query-strings
                      */
                     'force_cache_query_strings' => [],
-                    'force_cache_query_strings_merge' => true,
+                    'force_cache_query_strings_disable_field' => false,
                 ],
                 'database' => [
                     'options' => [
@@ -382,7 +385,7 @@ final class ConfigProvider
                      * for example: /wp-content/plugins/some-plugin/(.*).css
                      */
                     'cdn_file_exclusions' => [],
-                    'cdn_file_exclusions_merge' => true,
+                    'cdn_file_exclusions_disable_field' => false,
                 ],
                 'heartbeat' => [
                     'options' => [
@@ -413,9 +416,11 @@ final class ConfigProvider
 //                        'heartbeat_site_behavior' => 1,
                     ],
                 ],
+                'disabled_field_classname' => 'wpr-field--disabled',
             ],
             'hook' => [
                 'provider' => [
+                    InlineScript::class,
                     AdvancedRules\AlwaysPurgeUrls::class,
                     AdvancedRules\CacheQueryStrings::class,
                     AdvancedRules\NeverCacheCookies::class,
@@ -441,6 +446,7 @@ final class ConfigProvider
             'dependencies' => [
                 'aliases' => [],
                 'factories' => [
+                    InlineScript::class => InlineScriptFactory::class,
                     AdvancedRules\AlwaysPurgeUrls::class => AdvancedRules\AlwaysPurgeUrlsFactory::class,
                     AdvancedRules\CacheQueryStrings::class => AdvancedRules\CacheQueryStringsFactory::class,
                     AdvancedRules\NeverCacheCookies::class => AdvancedRules\NeverCacheCookiesFactory::class,

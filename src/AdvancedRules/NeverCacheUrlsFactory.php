@@ -13,8 +13,10 @@ class NeverCacheUrlsFactory
     {
         $config = Config::get($container);
         return new NeverCacheUrls(
+            'cache_reject_uri',
             $config->array('wp_rocket/advanced_rules/never_cache_urls'),
-            $config->bool('wp_rocket/advanced_rules/never_cache_urls_merge')
+            $config->bool('wp_rocket/advanced_rules/never_cache_urls_disable_field'),
+            $config->string('wp_rocket/disabled_field_classname')
         );
     }
 }

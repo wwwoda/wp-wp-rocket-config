@@ -13,8 +13,10 @@ class PrefetchDnsRequestsFactory
     {
         $config = Config::get($container);
         return new PrefetchDnsRequests(
+            'dns_prefetch',
             $config->array('wp_rocket/preload/prefetch_urls'),
-            $config->bool('wp_rocket/preload/prefetch_urls_merge'),
+            $config->bool('wp_rocket/preload/prefetch_urls_disable_field'),
+            $config->string('wp_rocket/disabled_field_classname')
         );
     }
 }

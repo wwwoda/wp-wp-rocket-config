@@ -13,8 +13,10 @@ class ExcludeAsyncCssFactory
     {
         $config = Config::get($container);
         return new ExcludeAsyncCss(
+            '',
             $config->array('wp_rocket/file_optimization/css/async_css_exclusions'),
-            $config->bool('wp_rocket/file_optimization/css/async_css_exclusions_merge')
+            false,
+            $config->string('wp_rocket/disabled_field_classname')
         );
     }
 }

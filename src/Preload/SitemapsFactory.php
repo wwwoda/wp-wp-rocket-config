@@ -13,8 +13,10 @@ class SitemapsFactory
     {
         $config = Config::get($container);
         return new Sitemaps(
+            'sitemaps',
             $config->array('wp_rocket/preload/sitemaps'),
-            $config->bool('wp_rocket/preload/sitemaps_merge'),
+            $config->bool('wp_rocket/preload/sitemaps_disable_field'),
+            $config->string('wp_rocket/disabled_field_classname')
         );
     }
 }
