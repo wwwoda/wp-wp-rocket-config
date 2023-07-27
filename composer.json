@@ -30,8 +30,8 @@
   },
   "require": {
     "php": ">=7.4",
-    "woda/wp-config": "^1.0",
-    "woda/wp-hook": "^1.0"
+    "woda/wp-config": "dev-php8",
+   "woda/wp-hook": "dev-php8"
   },
   "require-dev": {
     "eventjet/coding-standard": "^3.7",
